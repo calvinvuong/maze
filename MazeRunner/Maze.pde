@@ -1,4 +1,5 @@
 public class Maze {
+
     private Node start;
     private Node end;
     private int numNodes;
@@ -36,18 +37,22 @@ public class Maze {
     public void printNodes() {
 	printNodes(start);
     }
+  
+  public void printNodes() {
+    printNodes(start);
+  }
+  
+  public void printNodes(Node point) {
+    if ( point == null )
+      return;
     
-    public void printNodes(Node point) {
-	if ( point == null )
-	    return;
-
-	System.out.println(point);
-	for ( int i = 0; i < 3; i++ ) {
-	    printNodes(point.getNext(i));
-	}
+    System.out.println(point);
+    for ( int i = 0; i < 3; i++ ) {
+      printNodes(point.getNext(i));
     }
-	
-	   public void drawNodes() {
+  }
+  
+  public void drawNodes() {
     drawNodes(start, 200, 600);
   }
   
@@ -87,25 +92,25 @@ public class Maze {
         drawNodes(point.getNext(i), newX, newY);
       } // close if
     }
-      
+    
   }
   
-    private void shuffle(int[] array) {
-	for ( int i = 0; i < array.length; i++ ) {
-	    swap( array, i, (int) (Math.random() * array.length) );
-	}
+  private void shuffle(int[] array) {
+    for ( int i = 0; i < array.length; i++ ) {
+      swap( array, i, (int) (Math.random() * array.length) );
     }
-
-    private void swap(int[] array, int pos1, int pos2) {
-	int tmp = array[pos1];
-	array[pos1] = array[pos2];
-	array[pos2] = tmp;
-    }
-
-/*
-    public static void main(String[] args) {
-	Maze m = new Maze();
-	m.printNodes();
-    }
-    */
+  }
+  
+  private void swap(int[] array, int pos1, int pos2) {
+    int tmp = array[pos1];
+    array[pos1] = array[pos2];
+    array[pos2] = tmp;
+  }
+  
+  /*
+   public static void main(String[] args) {
+   Maze m = new Maze();
+   m.printNodes();
+   }
+   */
 }
