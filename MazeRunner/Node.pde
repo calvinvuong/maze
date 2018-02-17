@@ -20,10 +20,12 @@ public class Node {
 	 * The constructor for initializing a node. 
 	 * @param link a value of type int that represents the length from the previous node 
 	 * @param idNumber a value of type int that represents the id number of the node 
+	 * @param face a value of type int that marks the direction of the node 
 	 */
-	public Node(int link, int idNumber) {
+	public Node(int link, int idNumber, int face) {
 		setLink(link);
 		setIDNumber(idNumber);
+		setFace(face);
 	}
 	
 	/**
