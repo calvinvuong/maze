@@ -7,6 +7,9 @@ public class Node {
 	/** The length from the previous node */
 	private int link;
 	
+	/** The direction the node si facing */
+	private int face;
+	
 	/** The ID number of the node */
 	private int IDNumber;
 	
@@ -63,6 +66,22 @@ public class Node {
 	 */
 	public void setLink(int link) {
 		this.link = link;
+	}
+	
+	/**
+	 * The method that retrieves the direction of the node 
+	 * @return a value of type int
+ 	 */
+	public int getFace() {
+		return face;
+	}
+	
+	/**
+	 * The method that sets the direction of the node
+	 * @param face a value of type int that marks the direction of the node
+	 */
+	public void setFace(int face) {
+		this.face = face;
 	}
 
 	/** 
