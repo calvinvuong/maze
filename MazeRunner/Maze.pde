@@ -7,7 +7,7 @@ public class Maze {
     private int[] directionChoices = new int[] {0, 1, 2};
     
     public Maze() {
-	start = new Node(0, 0); // no link, id 0
+	start = new Node(0, 0, 1); // no link, id 0, face 1
 	numNodes = 1;
 	maxNodes = 12;
 	generate(start);
@@ -27,7 +27,7 @@ public class Maze {
 	shuffle(directionChoices);
 	
 	for ( int i = 0; i < numConnections; i++ ) {
-	    Node c = new Node( (int) (Math.random() * 25) + 50, numNodes++);
+	    Node c = new Node( (int) (Math.random() * 25) + 100, numNodes++, (s.getFace() + directionChoices[i]) % 4);
 	    s.setNext(directionChoices[i], c);
 	    generate(c);
 	}
@@ -64,17 +64,21 @@ public class Maze {
     for ( int i = 0; i < 3; i++ ) {
       if ( point.getNext(i) != null ) {
         int newX, newY;
-        if ( i == 0 ) {
+        if ( point.getFace() == 0 ) {
           newX = xcor - point.getNext(i).getLink();
           newY = ycor;
         }
-        else if ( i == 1 ) {
+        else if ( point.getFace() == 1 ) {
           newX = xcor;
           newY = ycor + point.getNext(i).getLink();
         }
-        else { // i == 2
+        else if ( point.getFace() == 2 ) { // i == 2
           newX = xcor + point.getNext(i).getLink();
           newY = ycor;
+        }
+        else { // i == 3
+          newX = xcor;
+          newY = ycor - point.getNext(i).getLink();
         }
         // draw line representing link
         line(xcor, ycor, newX, newY);
