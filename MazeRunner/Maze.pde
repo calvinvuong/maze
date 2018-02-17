@@ -1,53 +1,53 @@
 public class Maze {
-    private Node start;
-    private Node end;
-    private int numNodes;
-    private int maxNodes;
-
-    private int[] directionChoices = new int[] {0, 1, 2};
-    
-    public Maze() {
-	start = new Node(0, 0); // no link, id 0
-	numNodes = 1;
-	maxNodes = 12;
-	generate(start);
+  private Node start;
+  private Node end;
+  private int numNodes;
+  private int maxNodes;
+  
+  private int[] directionChoices = new int[] {0, 1, 2};
+  
+  public Maze() {
+    start = new Node(0, 0); // no link, id 0
+    numNodes = 1;
+    maxNodes = 12;
+    generate(start);
+  }
+  
+  // generates maze
+  // takes a pointer to a node, and generates a "maze" from each node recursively
+  public void generate(Node s) {
+    if ( numNodes >= maxNodes ) {
+      if ( end == null ) // end not set yet
+        end = s;
+      return;
     }
     
-    // generates maze
-    // takes a pointer to a node, and generates a "maze" from each node recursively
-    public void generate(Node s) {
-	if ( numNodes >= maxNodes ) {
-	    if ( end == null ) // end not set yet
-		end = s;
-	    return;
-	}
-	
-	// number of connections
-	int numConnections = (int) (Math.random() * 3) + 1; // 1 to 3 inclusive
-	shuffle(directionChoices);
-	
-	for ( int i = 0; i < numConnections; i++ ) {
-	    Node c = new Node( (int) (Math.random() * 25) + 50, numNodes++);
-	    s.setNext(directionChoices[i], c);
-	    generate(c);
-	}
-    }
-
-    public void printNodes() {
-	printNodes(start);
-    }
+    // number of connections
+    int numConnections = (int) (Math.random() * 3) + 1; // 1 to 3 inclusive
+    shuffle(directionChoices);
     
-    public void printNodes(Node point) {
-	if ( point == null )
-	    return;
-
-	System.out.println(point);
-	for ( int i = 0; i < 3; i++ ) {
-	    printNodes(point.getNext(i));
-	}
+    for ( int i = 0; i < numConnections; i++ ) {
+      Node c = new Node( (int) (Math.random() * 25) + 50, numNodes++);
+      s.setNext(directionChoices[i], c);
+      generate(c);
     }
-	
-	   public void drawNodes() {
+  }
+  
+  public void printNodes() {
+    printNodes(start);
+  }
+  
+  public void printNodes(Node point) {
+    if ( point == null )
+      return;
+    
+    System.out.println(point);
+    for ( int i = 0; i < 3; i++ ) {
+      printNodes(point.getNext(i));
+    }
+  }
+  
+  public void drawNodes() {
     drawNodes(start, 200, 600);
   }
   
@@ -83,25 +83,25 @@ public class Maze {
         drawNodes(point.getNext(i), newX, newY);
       } // close if
     }
-      
+    
   }
   
-    private void shuffle(int[] array) {
-	for ( int i = 0; i < array.length; i++ ) {
-	    swap( array, i, (int) (Math.random() * array.length) );
-	}
+  private void shuffle(int[] array) {
+    for ( int i = 0; i < array.length; i++ ) {
+      swap( array, i, (int) (Math.random() * array.length) );
     }
-
-    private void swap(int[] array, int pos1, int pos2) {
-	int tmp = array[pos1];
-	array[pos1] = array[pos2];
-	array[pos2] = tmp;
-    }
-
-/*
-    public static void main(String[] args) {
-	Maze m = new Maze();
-	m.printNodes();
-    }
-    */
+  }
+  
+  private void swap(int[] array, int pos1, int pos2) {
+    int tmp = array[pos1];
+    array[pos1] = array[pos2];
+    array[pos2] = tmp;
+  }
+  
+  /*
+   public static void main(String[] args) {
+   Maze m = new Maze();
+   m.printNodes();
+   }
+   */
 }
