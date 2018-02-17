@@ -32,6 +32,15 @@ public class Node {
 	}
 	
 	/**
+	 * The method that retrieves the connecting nodes. 
+	 * @param index respectively sets the input node to the left, front and right for 0, 1, and 2
+	 * @return the node object in the designated direction 
+	 */
+	public Node getNext(int index) {
+		return getNextNodes()[index];
+	}
+	
+	/**
 	 * The method that sets the connecting nodes 
 	 * @param index respectively sets the input node to the left, front and right for 0, 1, and 2
 	 * @param node the node to be connected 
@@ -88,4 +97,23 @@ public class Node {
 		this.visited = visited;
 	}
 	
+	public static void main(String[] args) {
+		Node start = new Node(0, 0);
+		Node id1 = new Node(2, 1); 
+		Node id2 = new Node(3, 2);
+		Node id3 = new Node(4, 3);
+		
+		start.setNext(1, id1);
+		id1.setNext(1, id3);
+		id1.setNext(2, id2);
+		
+		System.out.println(start);
+		System.out.println(start.getNext(0));
+		System.out.println(start.getNext(1));
+		System.out.println(start.getNext(2) + "\n-------------");
+		System.out.println(id1);
+		System.out.println(id1.getNext(0));
+		System.out.println(id1.getNext(1));
+		System.out.println(id1.getNext(2));
+	}
 }
