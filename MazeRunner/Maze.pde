@@ -10,7 +10,7 @@ public class Maze {
     public Maze() {
 	start = new Node(0, 0, 1); // no link, id 0, face 1
 	numNodes = 1;
-	maxNodes = 12;
+	maxNodes = 3;
 	generate(start);
     }
     
@@ -28,7 +28,8 @@ public class Maze {
 	shuffle(directionChoices);
 	
 	for ( int i = 0; i < numConnections; i++ ) {
-	    Node c = new Node( (int) (Math.random() * 25) + 100, numNodes++, (s.getFace() + directionChoices[i]) % 4);
+      println(directionChoices[i]);
+	    Node c = new Node( (int) (Math.random() * 25) + 50, numNodes++, (s.getFace() + directionChoices[i]) % 4);
 	    s.setNext(directionChoices[i], c);
 	    generate(c);
 	}
@@ -37,10 +38,6 @@ public class Maze {
     public void printNodes() {
 	printNodes(start);
     }
-  
-  public void printNodes() {
-    printNodes(start);
-  }
   
   public void printNodes(Node point) {
     if ( point == null )
@@ -69,15 +66,15 @@ public class Maze {
     for ( int i = 0; i < 3; i++ ) {
       if ( point.getNext(i) != null ) {
         int newX, newY;
-        if ( point.getFace() == 0 ) {
+        if ( point.getNext(i).getFace() == 0 ) {
           newX = xcor - point.getNext(i).getLink();
           newY = ycor;
         }
-        else if ( point.getFace() == 1 ) {
+        else if ( point.getNext(i).getFace() == 1 ) {
           newX = xcor;
           newY = ycor + point.getNext(i).getLink();
         }
-        else if ( point.getFace() == 2 ) { // i == 2
+        else if ( point.getNext(i).getFace() == 2 ) { // i == 2
           newX = xcor + point.getNext(i).getLink();
           newY = ycor;
         }
